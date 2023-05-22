@@ -6,7 +6,6 @@
 body, html, #main{
     height: 100%;
     width: 100%;
-    overflow: scroll;
 }
 
 .nav{
@@ -22,7 +21,6 @@ body, html, #main{
     justify-content: center;
     height: 100%;
     width: 100%;
-    overflow: scroll;
 }
 
 .rooms, .chat{

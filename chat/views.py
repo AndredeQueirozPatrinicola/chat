@@ -1,25 +1,44 @@
 from django.shortcuts import render
+from django.views import View
+
+from .models import *
 
 # Create your views here.
 
+class BaseView(View):
 
-def index(request):
-    rooms = [
-        {
-            "name" : "Room 1",
-            "number" : "1"
-        },
-        {
-            "name" : "Room 2",
-            "number" : "2"
-        },
-        {
-            "name" : "Room 3",
-            "number" : "3"
-        },
-    ]
+    @property
+    def context(self):
+        rooms = Room.objects.all()
+        context = {"rooms" : rooms}
+        return context
 
-    return render(request, 'home/index.html', {"rooms" : rooms})
 
-def room(request, room_name):
-    return render(request, "home/room.html", {"room_name": room_name})
+class IndexView(BaseView):
+
+    def get(self, *args, **kwargs):
+        return render(
+                 self.request, 
+                'home/index.html', 
+                 self.context
+                )
+
+class RoomView(BaseView):
+
+    @property
+    def context(self):
+        context = super().context
+        room_name = self.kwargs['room_name']
+        
+        messages = Chat.objects.filter(room__id=room_name)
+
+        context['room_name'] = room_name
+        context['messages'] = messages
+        return context
+
+    def get(self, *args, **kwargs):
+        return render(
+                 self.request, 
+                "home/room.html", 
+                 self.context
+                )

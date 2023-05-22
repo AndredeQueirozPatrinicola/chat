@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{{ teste }}
+
 <div class="rooms">
 
     <div class="rooms-row">
@@ -14,7 +16,7 @@
                 
                 <p>{{ room.name }}</p>
 
-                <a href="chat/{{ room.number }}">Join</a>
+                <a href="chat/{{ room.id }}">Join</a>
 
             </div>
 

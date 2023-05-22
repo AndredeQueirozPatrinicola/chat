@@ -27,12 +27,10 @@ class RoomView(BaseView):
 
     @property
     def context(self):
-        context = super().context
-        room_name = self.kwargs['room_name']
-        
-        messages = Chat.objects.filter(room__id=room_name)
-
-        context['room_name'] = room_name
+        context = {}
+        room_id = self.kwargs['room_id']
+        messages = Chat.objects.filter(room__id=room_id)
+        context['room_name'] = room_id
         context['messages'] = messages
         return context
 

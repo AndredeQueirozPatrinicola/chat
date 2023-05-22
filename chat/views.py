@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 
@@ -23,20 +24,32 @@ class IndexView(BaseView):
                  self.context
                 )
 
-class RoomView(BaseView):
+class RoomView(BaseView, LoginRequiredMixin):
 
     @property
     def context(self):
         context = {}
         room_id = self.kwargs['room_id']
+
         messages = Chat.objects.filter(room__id=room_id)
+
         context['room_name'] = room_id
         context['messages'] = messages
+        context['user_id'] = self.request.user.id
         return context
 
     def get(self, *args, **kwargs):
-        return render(
-                 self.request, 
-                "home/room.html", 
-                 self.context
-                )
+        players = Room.objects.filter(
+                                id=self.kwargs['room_id']
+                            ).values(
+                                'players_connected',
+                                'limit'      
+                            )
+        players = players[0]
+
+        if players['players_connected'] <= players['limit']:
+            return render(
+                    self.request, 
+                    "home/room.html", 
+                    self.context
+                    )

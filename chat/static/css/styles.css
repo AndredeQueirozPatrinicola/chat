@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html, #main{
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+}
+
+.nav{
+    display: flex;
+    width: 100%;
+    min-height: 5.5rem;
+    border-bottom: 0.25px solid #8898aa26;
+    box-shadow: 0 0 2rem 0 #8898aa26;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+}
+
+.rooms, .chat{
+    width: 65%;
+    height: 95%;
+    margin: 2rem;
+    box-shadow: 0 0 2rem 0 #8898aa26;
+    overflow: scroll;
+}
+
+.rooms-row{
+    display: flex;
+    justify-content: space-evenly;
+    min-height: 25rem;
+    width: 100%;
+    margin: 2.5rem 1rem;
+    max-height: 25rem;
+    height: 25rem;
+}
+
+.room-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    height: 90%;
+    box-shadow: 0 0 2rem 0 #8898aa26;
+    border-radius: 2.5rem;
+}

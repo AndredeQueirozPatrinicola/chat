@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="rooms">
+
+    <div class="rooms-row">
+
+        {% for room in rooms %}
+
+            <div class="room-card">
+                
+                <p>{{ room.name }}</p>
+
+                <a href="chat/{{ room.number }}">Join</a>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock content %}

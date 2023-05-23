@@ -5,7 +5,7 @@ const chatSocket = new WebSocket(
     + window.location.host
     + '/ws/chat/'
     + roomName
-    + '/'
+    + "?"
 );
 
 chatSocket.onopen = (e) => {

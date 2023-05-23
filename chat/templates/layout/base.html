@@ -45,6 +45,9 @@
             {% endif %}
         
         </nav>
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}
+        {% endif %}
         <div class="content">
             
             {% block content %}

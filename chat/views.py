@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
+from .forms import *
 
 # Create your views here.
 
@@ -24,7 +26,8 @@ class IndexView(BaseView):
                  self.context
                 )
 
-class RoomView(BaseView, LoginRequiredMixin):
+class RoomView(LoginRequiredMixin, BaseView):
+    login_url = "/login/"
 
     @property
     def context(self):
@@ -53,3 +56,28 @@ class RoomView(BaseView, LoginRequiredMixin):
                     "home/room.html", 
                     self.context
                     )
+        
+class CreateRoomView(LoginRequiredMixin, BaseView):
+    login_url = "/login/"
+
+    @property
+    def context(self):
+        form = RoomForm()
+        return {"form" : form}
+
+    def get(self, *args, **kwargs):
+        return render(
+                 self.request, 
+                'home/create-room.html', 
+                 self.context
+                )
+
+    def post(self, *args, **kwargs):
+
+        form = RoomForm(self.request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+        else:
+            messages.error(self.request, "Invalid Input!")
+            return redirect("/create-room")

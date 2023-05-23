@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="rooms">
+
+    <form class='login-form' action="/create-room" method="post">
+
+        {% csrf_token %}
+
+        {{ form }}
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% for message in messages %}
+        <span class="messages">{{ message }}</span>
+    {% endfor %}
+
+</div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+    <script>
+
+        const ownerIdElement = document.getElementById("owner")
+        ownerIdElement.value = '{{ user.id }}'
+        console.log(ownerIdElement)
+
+    </script>
+
+{% endblock scripts %}

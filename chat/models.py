@@ -10,7 +10,7 @@ class Room(models.Model):
     id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=64, null=False)
-    players_connected = models.IntegerField(null=False)
+    players_connected = models.IntegerField(null=False, default=0)
     limit = models.IntegerField(null=False)
     public = models.BooleanField(default=True)
 

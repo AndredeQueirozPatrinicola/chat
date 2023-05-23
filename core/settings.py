@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "chat"
+    "chat",
+    "authentication"
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,10 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'chat/templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'chat/templates'),
+            os.path.join(BASE_DIR, 'authentication/templates')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,7 +128,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'chat/static')
+    os.path.join(BASE_DIR, 'chat/static'),
+    os.path.join(BASE_DIR, 'authentication/static')
 ] 
 
 # Default primary key field type

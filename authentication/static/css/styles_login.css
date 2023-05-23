@@ -1,0 +1,18 @@
+.login-form{
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.login-form > button{
+    margin: 0.5rem 0.25rem 0.25rem 0;
+    width: 4rem;
+}
+
+.messages{
+    display: flex;
+    justify-content: center;
+    color: red;
+}

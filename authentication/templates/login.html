@@ -1,0 +1,32 @@
+
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block styles %}
+
+    <link href="{% static 'css/styles_login.css' %}" rel="stylesheet" type="text/css">
+
+{% endblock styles %}
+
+{% block content %}
+
+<div class="rooms">
+
+    <form class='login-form' action="/login/submit" method="post">
+        {% csrf_token %}
+
+        <label>Username</label>
+        <input type="text" name="username">
+        <label>Password</label>
+        <input type="password" name="password">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% for message in messages %}
+        <span class="messages">{{ message }}</span>
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

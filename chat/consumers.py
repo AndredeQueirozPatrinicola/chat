@@ -7,6 +7,7 @@ from asgiref.sync import sync_to_async
 from .models import *
 
 class ChatConsumer(AsyncWebsocketConsumer):
+    
     async def connect(self):
         self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
         self.room_group_name = "chat_%s" % self.room_name
@@ -18,7 +19,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if players_connected < room_limit:
             await self.channel_layer.group_add(self.room_group_name, self.channel_name)
             await self.accept()
-            await sync_to_async(Room.objects.update)(players_connected=players_connected+1)
+            await sync_to_async(Room.objects.filter(id=self.room_name).update)(players_connected=players_connected+1)
         else:
             await self.close()
 
@@ -39,6 +40,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def chat_message(self, event):
         message = event["message"]
-        
-        await self.send(text_data=json.dumps({"message": message}))
 
+        await self.send(text_data=json.dumps(
+                                                {
+                                                    "user" : "",
+                                                    "message": message
+                                                }
+                                            )
+                                        )

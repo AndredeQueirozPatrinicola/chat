@@ -2,7 +2,9 @@ from django.urls import path
 from authentication import views
 
 urlpatterns = [
-    path("login/", views.login_page),
-    path("login/submit", views.submit_login),
-    path("logout", views.logout_user)
+    path("login/", views.Login.as_view(), name='login-get'),
+    path("login/submit", views.Login.as_view(), name='login-post'),
+    path("logout", views.LogOut.as_view(), name='logout'),
+    path("signup", views.SignUp.as_view(), name='signup-get'),
+    path("signup/submit", views.SignUp.as_view(), name='signup-post')
 ]

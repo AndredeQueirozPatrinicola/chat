@@ -14,10 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [config('ALLOWED_HOSTS', default='*')]
 
 # Application definition
 
@@ -131,6 +130,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'chat/static'),
     os.path.join(BASE_DIR, 'authentication/static')
 ] 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

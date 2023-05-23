@@ -28,7 +28,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         players_connected = room.players_connected
 
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
-        await sync_to_async(Room.objects.update)(players_connected=players_connected-1)
+        await sync_to_async(Room.objects.filter(id=self.room_name).update)(players_connected=players_connected-1)
 
     async def receive(self, text_data):
         payload = json.loads(text_data)

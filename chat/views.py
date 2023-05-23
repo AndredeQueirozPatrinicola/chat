@@ -47,13 +47,16 @@ class RoomView(LoginRequiredMixin, BaseView):
                                 'limit'      
                             )
         players = players[0]
-
-        if players['players_connected'] <= players['limit']:
+        print(players)
+        if players['players_connected'] < players['limit']:
             return render(
                     self.request, 
                     "home/room.html", 
                     self.context
                     )
+        else:
+            messages.error(self.request, "Full room")
+            return redirect("/")
         
 class CreateRoomView(LoginRequiredMixin, BaseView):
     login_url = "/login/"

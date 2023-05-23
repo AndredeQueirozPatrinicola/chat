@@ -6,6 +6,10 @@
 
 <div class="rooms">
 
+    {% for message in messages %}
+        <span>{{ message }}</span>
+    {% endfor %}
+
     <div class="rooms-row">
 
         {% for room in rooms %}

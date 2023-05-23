@@ -31,15 +31,13 @@ class RoomView(LoginRequiredMixin, BaseView):
 
     @property
     def context(self):
-        context = {}
         room_id = self.kwargs['room_id']
-
         messages = Chat.objects.filter(room__id=room_id)
-
-        context['room_name'] = room_id
-        context['messages'] = messages
-        context['user_id'] = self.request.user.id
-        return context
+        return {
+            'room_name' : room_id,
+            "messages" : messages,
+            "user_id" : self.request.user.id
+        }
 
     def get(self, *args, **kwargs):
         players = Room.objects.filter(
